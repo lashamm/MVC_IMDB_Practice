@@ -1,0 +1,18 @@
+﻿@using MVC_IMDB_Practice.Models.Entities;
+@model Movie
+
+<form method="post" asp-action="Delete">
+
+    <p>Title: @Model.Title</p>
+
+    <p>genre: @Model.Genre</p>
+
+    <p>Director: @Model.Director</p>
+
+    <p>Release year: @Model.ReleaseYear</p>
+
+    <p>Duration : @Model.Duration</p>
+
+    <button type="submit">Delete</button>
+    <button asp-action="Index" type="submit">Cancel</button>
+</form>

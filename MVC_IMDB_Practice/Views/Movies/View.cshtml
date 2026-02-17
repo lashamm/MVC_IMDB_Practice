@@ -1,0 +1,17 @@
+﻿@using MVC_IMDB_Practice.Models.Entities;
+@model Movie
+
+<form method="get" asp-action="View">
+
+    <p>Title: @Model.Title</p>
+
+    <p>genre: @Model.Genre</p>
+
+    <p>Director: @Model.Director</p>
+
+    <p>Release year: @Model.ReleaseYear</p>
+
+    <p>Duration : @Model.Duration</p>
+
+    <button asp-action="Index" type="submit">Go Back</button>
+</form>

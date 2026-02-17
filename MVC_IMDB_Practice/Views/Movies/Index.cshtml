@@ -3,10 +3,16 @@
 @{
 }
 <h1>Movies</h1>
+
+<a asp-action="Create" class="btn btn-primary" >
+    Add Movie
+</a>
+
+
 <table class="table">
 	<thead>
 		<tr>
-			@* <th>Id</th> *@
+			<th>Id</th>
 			<th>Title</th>
 			<th>Release Date</th>
 			<th>Genre</th>
@@ -18,15 +24,20 @@
 		@foreach (var movie in Model)
 		{
 			<tr>
-				@* <td>@movie.Id</td> *@
+				<td>@movie.Id</td>
 				<td>@movie.Title</td>
 				<td>Release year: @movie.ReleaseYear</td>
 				<td>Genre: @movie.Genre</td>
 				<td>Director: @movie.Director</td>
 				<td>Duration: @movie.Duration</td>
+				<td>
+                    <a asp-action="Edit" asp-route-id="@movie.Id"> <i class="fa-solid fa-pen-to-square"></i>Edit</a>
+					<a asp-action="View" asp-route-id="@movie.Id"> <i class="fa-solid fa-eye"></i>View</a>
+					<a asp-action="Delete" asp-route-id="@movie.Id"> <i class="fa-solid fa-trash"></i>Delete</a>
+                </td>
 			</tr>
 		}
 	</tbody>
 
 
-	<button class="btn-style">Add Movie</button>
+	

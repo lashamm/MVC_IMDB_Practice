@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_IMDB_Practice.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20260217094344_onpc")]
-    partial class onpc
+    [Migration("20260217122318_initialcreate")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,7 +53,7 @@ namespace MVC_IMDB_Practice.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movie");
+                    b.ToTable("Movies");
                 });
 #pragma warning restore 612, 618
         }

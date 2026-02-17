@@ -50,7 +50,7 @@ namespace MVC_IMDB_Practice.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movie");
+                    b.ToTable("Movies");
                 });
 #pragma warning restore 612, 618
         }

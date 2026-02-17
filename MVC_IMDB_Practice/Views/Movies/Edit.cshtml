@@ -1,0 +1,25 @@
+﻿@using MVC_IMDB_Practice.Models.Entities;
+@model Movie
+
+<form method="post" asp-action="Edit">
+    <label for="">Id</label>
+    <input placeholder="Id" asp-for="@Model.Id" readonly />
+
+    <label for="">Title</label>
+    <input placeholder="Title" asp-for="@Model.Title" />
+
+    <label for="">Duration</label>
+    <input placeholder="Duration" asp-for="@Model.Duration" />
+
+    <label for="">ReleaseYear</label>
+    <input placeholder="ReleaseYear" asp-for="@Model.ReleaseYear" />
+
+    <label for="">Director</label>
+    <input placeholder="Director" asp-for="@Model.Director" />
+
+    <label for="">Genre</label>
+    <input placeholder="Genre" asp-for="@Model.Genre" />
+
+    <button type="submit">Edit</button>
+    <button asp-action="Index" type="submit">Cancel</button>
+</form>
