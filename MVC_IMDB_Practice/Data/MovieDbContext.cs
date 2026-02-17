@@ -5,14 +5,14 @@ namespace MVC_IMDB_Practice.Data
 {
     public class MovieDbContext : DbContext
     {
-        public MovieDbContext()
-        {
-        }
+        public DbSet<Movie> Movies { get; set; }
 
         public MovieDbContext(DbContextOptions options) : base(options)
         {
         }
 
-        public DbSet<Models.Entities.Movie> Movie { get; set; }
+        protected MovieDbContext()
+        {
+        }
     }
 }

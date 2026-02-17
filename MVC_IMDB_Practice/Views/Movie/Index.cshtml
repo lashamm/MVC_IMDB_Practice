@@ -1,0 +1,32 @@
+﻿@using MVC_IMDB_Practice.Models.Entities;
+@model IEnumerable<Movie>
+@{
+}
+<h1>Movies</h1>
+<table class="table">
+	<thead>
+		<tr>
+			@* <th>Id</th> *@
+			<th>Title</th>
+			<th>Release Date</th>
+			<th>Genre</th>
+			<th>Director</th>
+			<th>Duration</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var movie in Model)
+		{
+			<tr>
+				@* <td>@movie.Id</td> *@
+				<td>@movie.Title</td>
+				<td>Release year: @movie.ReleaseYear</td>
+				<td>Genre: @movie.Genre</td>
+				<td>Director: @movie.Director</td>
+				<td>Duration: @movie.Duration</td>
+			</tr>
+		}
+	</tbody>
+
+
+	<button class="btn-style">Add Movie</button>
