@@ -1,4 +1,5 @@
 using MVC_IMDB_Practice.Data;
+using MVC_IMDB_Practice.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ builder.Services.AddControllersWithViews();
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddSqlServer<MovieDbContext>(connectionString);
+
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 var app = builder.Build();
 
