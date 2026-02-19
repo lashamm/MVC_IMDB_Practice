@@ -9,18 +9,20 @@ namespace MVC_IMDB_Practice.Services
     {
         private readonly MovieDbContext movieContext;
 
+        public MovieService()
+        {
+        }
+
         public MovieService(MovieDbContext movieContext)
         {
             this.movieContext = movieContext;
         }
 
-        [HttpPost]
         public async Task CreateAsync(Movie movie)
         {
             await movieContext.Movies.AddAsync(movie);
             await movieContext.SaveChangesAsync();
         }
-        [HttpPost]
         public async Task DeleteMovieByIdAsync(int id)
         {
             await movieContext.Movies.Where(m => m.Id == id).ExecuteDeleteAsync();
@@ -36,7 +38,7 @@ namespace MVC_IMDB_Practice.Services
         public async Task<IEnumerable<Movie>> GetMoviesAsync()
         {
             await movieContext.Movies.ToListAsync();
-             return await movieContext.Movies.ToListAsync();
+            return await movieContext.Movies.ToListAsync();
         }
 
         public async Task UpdateMovieAsync(int id, Movie newMovie)
@@ -50,5 +52,4 @@ namespace MVC_IMDB_Practice.Services
              await movieContext.SaveChangesAsync();
         }
     }
-
 }
