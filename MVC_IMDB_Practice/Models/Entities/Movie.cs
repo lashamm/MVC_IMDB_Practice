@@ -1,17 +1,8 @@
-﻿namespace MVC_IMDB_Practice.Models.Entities
+﻿using MVC_IMDB_Practice.Enums;
+
+namespace MVC_IMDB_Practice.Models.Entities
 {
 
-    public enum Genre {         Action,
-        Comedy,
-        Drama,
-        Horror,
-        ScienceFiction,
-        Romance,
-        Thriller,
-        Fantasy,
-        Animation,
-        Documentary
-    }
     public class Movie
     {
         public int Id { get; set; }

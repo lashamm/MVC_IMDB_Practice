@@ -1,4 +1,6 @@
-﻿using MVC_IMDB_Practice.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MVC_IMDB_Practice.Data;
 using MVC_IMDB_Practice.Models.Entities;
 
 namespace MVC_IMDB_Practice.Services
@@ -12,29 +14,40 @@ namespace MVC_IMDB_Practice.Services
             this.movieContext = movieContext;
         }
 
-        public Task CreateAsync(Movie movie)
+        [HttpPost]
+        public async Task CreateAsync(Movie movie)
         {
-            throw new NotImplementedException();
+            await movieContext.Movies.AddAsync(movie);
+            await movieContext.SaveChangesAsync();
+        }
+        [HttpPost]
+        public async Task DeleteMovieByIdAsync(int id)
+        {
+            await movieContext.Movies.Where(m => m.Id == id).ExecuteDeleteAsync();
+            await movieContext.SaveChangesAsync();
         }
 
-        public Task DeleteMovieByIdAsync(int id)
+        public async Task<Movie> GetMovieByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            await movieContext.Movies.Where(m => m.Id == id).FirstOrDefaultAsync();
+             return await movieContext.Movies.FindAsync(id);
         }
 
-        public Task<Movie> GetMovieByIdAsync(int id)
+        public async Task<IEnumerable<Movie>> GetMoviesAsync()
         {
-            throw new NotImplementedException();
+            await movieContext.Movies.ToListAsync();
+             return await movieContext.Movies.ToListAsync();
         }
 
-        public Task<IEnumerable<Movie>> GetMoviesAsync()
+        public async Task UpdateMovieAsync(int id, Movie newMovie)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateMovieAsync(int id, Movie newMovie)
-        {
-            throw new NotImplementedException();
+            await movieContext.Movies.Where(m => m.Id == id).ExecuteUpdateAsync(m => m
+                .SetProperty(p => p.Title, newMovie.Title)
+                .SetProperty(p => p.Genre, newMovie.Genre)
+                .SetProperty(p => p.ReleaseYear, newMovie.ReleaseYear)
+                .SetProperty(p => p.Director, newMovie.Director)
+                .SetProperty(p => p.Duration, newMovie.Duration));
+             await movieContext.SaveChangesAsync();
         }
     }
 
