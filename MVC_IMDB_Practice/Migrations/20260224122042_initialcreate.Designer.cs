@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_IMDB_Practice.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20260214125351_SecondMig")]
-    partial class SecondMig
+    [Migration("20260224122042_initialcreate")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,9 +40,8 @@ namespace MVC_IMDB_Practice.Migrations
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
 
-                    b.Property<string>("Genre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Genre")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ReleaseYear")
                         .HasColumnType("datetime2");
@@ -53,7 +52,7 @@ namespace MVC_IMDB_Practice.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movie");
+                    b.ToTable("Movies");
                 });
 #pragma warning restore 612, 618
         }

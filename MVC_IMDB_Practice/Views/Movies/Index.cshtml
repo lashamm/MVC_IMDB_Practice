@@ -1,12 +1,26 @@
 ﻿@using MVC_IMDB_Practice.Models.Entities;
-@model IEnumerable<Movie>
+@model IPagedList<Movie>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
 @{
+    string search = ViewBag["CurrentSearch"] as string;
 }
 <h1>Movies</h1>
 
 <a asp-action="Create" class="btn btn-primary">
     Add Movie
 </a>
+
+@if (Model.Any() == false)
+{
+    <div>
+        <h1>There is no movies</h1>
+    </div>
+}
+
+@if(Model.Count() > 0)
+{
+    
 
 
 <table class="table">
@@ -39,3 +53,25 @@
         }
     </tbody>
 </table>
+    <div>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </div>
+
+    @Html.PagedListPager(Model, pagePos =>
+    Url.Action("Index",
+    new { pagePos }),
+    new PagedListRenderOptions
+    {
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination", "mb-0" },
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        LinkToFirstPageFormat = "«",
+        LinkToPreviousPageFormat = "‹",
+        LinkToNextPageFormat = "›",
+        LinkToLastPageFormat = "»",}
+    )
+}

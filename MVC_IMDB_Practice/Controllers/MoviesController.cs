@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using MVC_IMDB_Practice.Data;
 using MVC_IMDB_Practice.Models.Entities;
 using MVC_IMDB_Practice.Services;
+using System.Runtime.CompilerServices;
+using X.PagedList;
+using X.PagedList.Extensions;
 
 namespace MVC_IMDB_Practice.Controllers
 {
@@ -15,9 +18,21 @@ namespace MVC_IMDB_Practice.Controllers
             this.service = movieService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageSize, int? pageNumber, string? searchTitle)
         {
-            IEnumerable<Movie> movies = await service.GetMoviesAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            int pageCount = pageSize ?? 1;
+            int pageN = pageNumber ?? 10;
+
+            var query = await service.GetMoviesAsync();
+            IPagedList<Movie> movies = query.ToPagedList(pageN, pageCount);
+            //.Skip((pageN - 1) * pageCount).
+            //Take(pageCount);
+
+
             return View(movies);
         }
 
@@ -30,6 +45,8 @@ namespace MVC_IMDB_Practice.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Movie movieItem)
         {
+
+           
             //await movieContext.AddAsync(movieItem);
             //movieContext.SaveChanges();
             await service.CreateAsync(movieItem);
