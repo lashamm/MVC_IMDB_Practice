@@ -1,4 +1,5 @@
-﻿@using MVC_IMDB_Practice.Models.Entities;
+﻿@using MVC_IMDB_Practice.Enums
+@using MVC_IMDB_Practice.Models.Entities;
 @model Movie
 
 <form method="post" asp-action="Edit">
@@ -16,10 +17,12 @@
 
     <label for="">Director</label>
     <input placeholder="Director" asp-for="@Model.Director" />
-
-    <label for="">Genre</label>
-    <input placeholder="Genre" asp-for="@Model.Genre" />
-
+        <label asp-for="Genre"></label>
+        <select asp-for="Genre"
+                asp-items="Html.GetEnumSelectList<Genre>()"
+                class="form-control">
+            <option value="">-- Select Genre --</option>
+        </select>
     <button type="submit">Edit</button>
     <button asp-action="Index" type="submit">Cancel</button>
 </form>

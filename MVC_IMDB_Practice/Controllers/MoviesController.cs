@@ -8,20 +8,16 @@ namespace MVC_IMDB_Practice.Controllers
 {
     public class MoviesController : Controller
     {
-        private readonly MovieDbContext movieContext;
+        IMovieService service;
 
-
-        MovieService service = new MovieService();
-
-        public MoviesController(MovieDbContext context)
+        public MoviesController(IMovieService movieService)
         {
-            this.movieContext = context;
+            this.service = movieService;
         }
 
         public async Task<IActionResult> Index()
         {
-            List<Movie> movies = await movieContext.Movies.ToListAsync();
-            //List<Movie> movies = await service.GetMoviesAsync() as List<Movie>;
+            IEnumerable<Movie> movies = await service.GetMoviesAsync();
             return View(movies);
         }
 

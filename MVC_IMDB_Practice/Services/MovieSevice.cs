@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MVC_IMDB_Practice.Data;
 using MVC_IMDB_Practice.Models.Entities;
+using System.Collections.Immutable;
 
 namespace MVC_IMDB_Practice.Services
 {
@@ -9,15 +10,11 @@ namespace MVC_IMDB_Practice.Services
     {
         private readonly MovieDbContext movieContext;
 
-        public MovieService()
-        {
-        }
-
         public MovieService(MovieDbContext movieContext)
         {
             this.movieContext = movieContext;
         }
-
+            
         public async Task CreateAsync(Movie movie)
         {
             await movieContext.Movies.AddAsync(movie);
@@ -29,7 +26,7 @@ namespace MVC_IMDB_Practice.Services
             await movieContext.SaveChangesAsync();
         }
 
-        public async Task<Movie> GetMovieByIdAsync(int id)
+        public async Task<Movie?> GetMovieByIdAsync(int id)
         {
             await movieContext.Movies.Where(m => m.Id == id).FirstOrDefaultAsync();
              return await movieContext.Movies.FindAsync(id);
@@ -37,7 +34,6 @@ namespace MVC_IMDB_Practice.Services
 
         public async Task<IEnumerable<Movie>> GetMoviesAsync()
         {
-            await movieContext.Movies.ToListAsync();
             return await movieContext.Movies.ToListAsync();
         }
 

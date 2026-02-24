@@ -12,7 +12,7 @@ namespace MVC_IMDB_Practice.Services
 
         Task<IEnumerable<Movie>> GetMoviesAsync();
 
-        Task<Movie> GetMovieByIdAsync(int id);
+        Task<Movie?> GetMovieByIdAsync(int id);
     }
 
 }
